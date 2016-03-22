@@ -12,6 +12,7 @@
     <Page.DataContext>
         <vm:ChatPageViewModel/>
     </Page.DataContext>
+    
     <Page.Resources>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White" />
@@ -32,7 +33,7 @@
             </Setter>
         </Style>
         <!--REMOVES PADDING FROM LISTBOX SO THAT IT DOESNT APPEAR AS WHITE INNER BORDER-->
-        <Style TargetType="{x:Type ListBox}">
+        <!--<Style TargetType="{x:Type ListBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBox}">
@@ -40,7 +41,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
         <!--<Style TargetType="{x:Type TextBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -97,10 +98,16 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Rectangle Fill="#373737" Grid.Row="0" Grid.Column="0"/>
-                    <Label Content="Who's Here(Count)" Grid.Row="0" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontWeight="Bold"/>
-                    <Border Grid.Row="1" BorderBrush="#232323" BorderThickness="1">
-                        <ListBox Grid.Row="1" Background="#232323" FontFamily="Microsoft NeoGothic" FontWeight="Bold" Foreground="White"/>
-                    </Border>
+                    <Label Content="Who's Here" Grid.Row="0" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontWeight="Bold"/>
+                    <!--<Border Grid.Row="1" BorderBrush="#232323" BorderThickness="1">-->
+                        <ListBox Grid.Row="1" ItemsSource="{Binding userList}" Background="#232323" FontFamily="Microsoft NeoGothic" FontWeight="Bold" Foreground="White" Height="Auto" Width="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    <!--</Border>-->
                 </Grid>
                 <!--LOWER SIDE GRID-->
                 <Grid Grid.Row="2">
@@ -152,7 +159,7 @@
                         <ColumnDefinition Width="84*"/>
                         <ColumnDefinition Width="16*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Grid.Row="0" FontWeight="Bold" FontFamily="Microsoft NeoGothic" Foreground="#373737" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" Height="25"/>
+                    <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding messageToSend}" FontWeight="Bold" FontFamily="Microsoft NeoGothic" Foreground="#373737" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" Height="25"/>
                     <Button Grid.Column="1" Grid.Row="0" Content="SEND"/>
                 </Grid>
             </Grid>
