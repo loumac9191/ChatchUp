@@ -52,6 +52,7 @@
     <Compile Include="chatingUser.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="chatingUserRepository.cs" />
     <Compile Include="chatMessage.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
     </Compile>
