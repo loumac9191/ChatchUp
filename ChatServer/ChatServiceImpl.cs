@@ -14,6 +14,8 @@ namespace ChatServer
     {
         private readonly Dictionary<IChatClient, ChatUser> _users = new Dictionary<IChatClient, ChatUser>();
 
+
+
         #region Implementation of IChatService
 
         public void Login(string userName)
@@ -48,7 +50,17 @@ namespace ChatServer
                 if(otherConnection == connection)
                     continue;
                 otherConnection.ReceiveMessage(user.UserName, message);
+                AMessage(user.UserName, message);
+
+
             }
+        }
+
+        public string AMessage(string userName, string message)
+        {
+            string s = String.Format("{0}: {1}", userName, message);
+
+            return s;
         }
 
         public ChatUser[] LoggedInUsers

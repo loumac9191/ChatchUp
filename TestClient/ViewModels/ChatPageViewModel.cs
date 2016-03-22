@@ -11,26 +11,35 @@ namespace TestClient.ViewModels
 {
     public class ChatPageViewModel : BaseViewModel
     {
+        public event EventHandler SomethingHappened;
         DuplexChannelFactory<IChatService> channelFactory;
         IChatService server;
-        List<string> usersLoggedIn; 
-
+        List<string> usersLoggedIn;
+        //ChatClientImpl chatImpl;
 
         public ChatPageViewModel()
         {
-            //var chatClientImpl = new ChatClientImpl();
-            //var channelFactory = new DuplexChannelFactory<IChatService>(chatClientImpl, "ChatServiceEndpoint");
             channelFactory = new DuplexChannelFactory<IChatService>(new ChatClientImpl(), "ChatServiceEndpoint");
             server = channelFactory.CreateChannel();
 
             user = Environment.UserName.ToString(); 
             server.Login(user);
 
+            //chatImpl = new ChatClientImpl();
+
             text = new ObservableCollection<string>();
 
             usersLoggedIn = server.UsernameInChat();
             userList = new ObservableCollection<string>(usersLoggedIn);
+        }
 
+        public void DoSomething()
+        {
+            EventHandler handler = SomethingHappened;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
         }
 
         //UPDATE USERLIST
@@ -70,7 +79,7 @@ namespace TestClient.ViewModels
         public void SendButton()
         {
             server.SendMessage(messageToSend);
-            text.Add(String.Format("{0} : {1}", user, messageToSend));
+            text.Add(String.Format("{0}: {1}", user, messageToSend));
             messageToSend = "";
         }
 
@@ -123,8 +132,6 @@ namespace TestClient.ViewModels
         public void AllUsersCurrentlyLoggedIn()
         {
             //userList = server.UsernameInChat();
-        }
-        
-        
+        }        
     }
 }
