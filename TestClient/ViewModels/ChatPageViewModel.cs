@@ -12,6 +12,7 @@ namespace TestClient.ViewModels
     public class ChatPageViewModel : BaseViewModel
     {
         DuplexChannelFactory<IChatService> channelFactory;
+        IChatService server;
         List<string> usersLoggedIn; 
 
 
@@ -20,31 +21,33 @@ namespace TestClient.ViewModels
             //var chatClientImpl = new ChatClientImpl();
             //var channelFactory = new DuplexChannelFactory<IChatService>(chatClientImpl, "ChatServiceEndpoint");
             channelFactory = new DuplexChannelFactory<IChatService>(new ChatClientImpl(), "ChatServiceEndpoint");
-            var server = channelFactory.CreateChannel();
+            server = channelFactory.CreateChannel();
 
-            User = Environment.UserName.ToString(); 
-            server.Login(User);
+            user = Environment.UserName.ToString(); 
+            server.Login(user);
+
+            text = new ObservableCollection<string>();
 
             usersLoggedIn = server.UsernameInChat();
             userList = new ObservableCollection<string>(usersLoggedIn);
 
         }
 
-        //UPDATE
+        //UPDATE USERLIST
         //private void UpdateCommands()
         //{
-        //    ((Command)itemToRemoveFromDatabase).RaiseCanExecuteChanged();
+        //    (OnPropertyChanged("userList")).RaiseCanExecuteChanged();
         //}
 
-        private string _User;
+        private string _user;
 
-        public string User
+        public string user
         {
-            get { return _User; }
+            get { return _user; }
             set
             {
-                _User = value;
-                OnPropertyChanged("User");
+                _user = value;
+                OnPropertyChanged("user");
             }
         }
 
@@ -66,7 +69,9 @@ namespace TestClient.ViewModels
 
         public void SendButton()
         {
-            //METHOD FOR SENDING MESSAGES
+            server.SendMessage(messageToSend);
+            text.Add(String.Format("{0} : {1}", user, messageToSend));
+            messageToSend = "";
         }
 
         public bool CanPressSendButton()
@@ -89,12 +94,16 @@ namespace TestClient.ViewModels
 
         //MESSAGES THAT APPEAR IN THE MAIN LISTBOX
         //UNFINISHED
-        private string _text;
+        private ObservableCollection<string> _text;
 
-        public string text
+        public ObservableCollection<string> text
         {
             get { return _text; }
-            set { _text = value; }
+            set 
+            { 
+                _text = value;
+                OnPropertyChanged("text");
+            }
         }
         
         //LIST OF USERS

@@ -84,7 +84,7 @@
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="85*"/>
             </Grid.RowDefinitions>
-            <Label Content="{Binding User}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontSize="18" FontWeight="Bold" Height="Auto" Width="Auto"/>
+            <Label Content="{Binding user}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontSize="18" FontWeight="Bold" Height="Auto" Width="Auto"/>
             <Grid Grid.Column="0" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="495*"/>
@@ -99,7 +99,7 @@
                     </Grid.RowDefinitions>
                     <Rectangle Fill="#373737" Grid.Row="0" Grid.Column="0"/>
                     <Label Content="Who's Here" Grid.Row="0" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontWeight="Bold"/>
-                    <!--<Border Grid.Row="1" BorderBrush="#232323" BorderThickness="1">-->
+                    <Border Grid.Row="1" BorderBrush="#232323" BorderThickness="1">
                         <ListBox Grid.Row="1" ItemsSource="{Binding userList}" Background="#232323" FontFamily="Microsoft NeoGothic" FontWeight="Bold" Foreground="White" Height="Auto" Width="Auto">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -107,7 +107,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                    <!--</Border>-->
+                    </Border>
                 </Grid>
                 <!--LOWER SIDE GRID-->
                 <Grid Grid.Row="2">
@@ -138,13 +138,13 @@
                 <Rectangle Fill="#a8a2a2" Grid.Row="3" Grid.Column="0"/>
                 <Rectangle Fill="#7413d9" Grid.Row="0"/>
                 <TextBlock Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" Text="TITLE OF CHAT ROOM" Foreground="White" VerticalAlignment="Center" FontFamily="Microsoft NeoGothic" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-                <ListBox Grid.Column="0" Grid.Row="2">
+                <!--<ListBox Grid.Column="0" Grid.Row="2" FontWeight="Bold" FontFamily="Microsoft NeoGothic" Foreground="#373737">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                <TextBlock Text="{Binding User}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding user}" FontWeight="Bold" />
                                 <TextBlock Text=": " FontWeight="Bold" />
-                                <TextBlock Text="{Binding Text}" Width="Auto" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+                                <TextBlock Text="{Binding text}" Width="Auto" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
                             </WrapPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -153,14 +153,15 @@
                             <StackPanel VerticalAlignment="Bottom"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
-                </ListBox>
+                </ListBox>-->
+                <ListBox Grid.Column="0" Grid.Row="2" ItemsSource="{Binding text}"/>
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="84*"/>
                         <ColumnDefinition Width="16*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding messageToSend}" FontWeight="Bold" FontFamily="Microsoft NeoGothic" Foreground="#373737" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" Height="25"/>
-                    <Button Grid.Column="1" Grid.Row="0" Content="SEND"/>
+                    <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding messageToSend, Mode=TwoWay}" FontWeight="Bold" FontFamily="Microsoft NeoGothic" Foreground="#373737" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0" Height="25"/>
+                    <Button Grid.Column="1" Grid.Row="0" Content="SEND" Command="{Binding sendButton}"/>
                 </Grid>
             </Grid>
         </Border>
