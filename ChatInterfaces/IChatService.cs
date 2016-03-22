@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 // ----------------------------------------------------------------------------
 // Copyright 2010 Wyle
 // ----------------------------------------------------------------------------
@@ -22,5 +23,10 @@ namespace ChatInterfaces
             [OperationContract]
             get;
         }
+
+        //Method ADDED
+        [OperationContract]
+        List<string> UsernameInChat();
+
     }
 }

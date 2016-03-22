@@ -59,6 +59,16 @@ namespace ChatServer
             }
         }
 
+        public List<string> UsernameInChat()
+        {
+            List<string> usernamesInChatToDisplay = new List<string>();
+            foreach (KeyValuePair<IChatClient, ChatUser> user in _users)
+            {
+                usernamesInChatToDisplay.Add(user.Value.UserName);
+            }
+            return usernamesInChatToDisplay;
+        }
+
         #endregion
     }
 }
