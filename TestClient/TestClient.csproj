@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ChatClientImpl.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ChatPageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
