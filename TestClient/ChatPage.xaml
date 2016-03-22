@@ -83,7 +83,7 @@
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="85*"/>
             </Grid.RowDefinitions>
-            <Label Content="{Binding User}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontSize="18" FontWeight="Bold" Height="25" Width="100"/>
+            <Label Content="{Binding User}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontSize="18" FontWeight="Bold" Height="Auto" Width="Auto"/>
             <Grid Grid.Column="0" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="495*"/>
