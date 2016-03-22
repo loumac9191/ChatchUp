@@ -8,7 +8,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="620"
       Title="ChatPage">
-
+    
+    <Page.DataContext>
+        <vm:ChatPageViewModel/>
+    </Page.DataContext>
     <Page.Resources>
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White" />
@@ -80,7 +83,7 @@
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="85*"/>
             </Grid.RowDefinitions>
-            <Label Content="{Binding User, Mode=OneWay}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontSize="18" FontWeight="Bold"/>
+            <Label Content="{Binding User}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontSize="18" FontWeight="Bold" Height="25" Width="100"/>
             <Grid Grid.Column="0" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="495*"/>
@@ -128,7 +131,7 @@
                 <Rectangle Fill="#a8a2a2" Grid.Row="3" Grid.Column="0"/>
                 <Rectangle Fill="#7413d9" Grid.Row="0"/>
                 <TextBlock Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" Text="TITLE OF CHAT ROOM" Foreground="White" VerticalAlignment="Center" FontFamily="Microsoft NeoGothic" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-                <ListBox Name="ListBoxMain" Grid.Column="0" Grid.Row="2">
+                <ListBox Grid.Column="0" Grid.Row="2">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>

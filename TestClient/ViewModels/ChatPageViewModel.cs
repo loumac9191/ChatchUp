@@ -11,10 +11,13 @@ namespace TestClient.ViewModels
     {
         public ChatPageViewModel()
         {
+            //var chatClientImpl = new ChatClientImpl();
+            //var channelFactory = new DuplexChannelFactory<IChatService>(chatClientImpl, "ChatServiceEndpoint");
             var channelFactory = new DuplexChannelFactory<IChatService>(new ChatClientImpl(), "ChatServiceEndpoint");
             var server = channelFactory.CreateChannel();
 
-            server.Login(Environment.UserName);
+            User = Environment.UserName.ToString(); 
+            server.Login(User);
         }
 
         private string _User;
@@ -25,6 +28,8 @@ namespace TestClient.ViewModels
             set
             {
                 _User = Environment.UserName.ToString();
+                OnPropertyChanged("User");
+                //_User = value;
             }
         }
 
