@@ -22,12 +22,12 @@ namespace ChatServer
             var user = new ChatUser {UserName = userName, LogInTime = DateTime.Now};
             _users[connection] = user;
 
-            //foreach (var otherConnection in _users.Keys)
-            //{
-            //    if (otherConnection == connection)
-            //        continue;
-            //    otherConnection.ReceiveMessage(user.UserName, message);
-            //}
+            foreach (var otherConnection in _users.Keys)
+            {
+                if (otherConnection == connection)
+                    continue;
+                otherConnection.UpdateUserList(user.UserName);
+            }
 
             Console.WriteLine("{0} logged in.", userName);
         }

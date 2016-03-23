@@ -23,7 +23,10 @@ namespace TestClient
 
         public void UpdateUserList(string userName)
         {
-
+            Frame frame = App.Current.MainWindow.FindName("MainFrame") as Frame;
+            ChatPage chatPage = frame.Content as ChatPage;
+            ChatPageViewModel cpvm = chatPage.DataContext as ChatPageViewModel;
+            cpvm.userList.Add(userName);
         }
     }
 }

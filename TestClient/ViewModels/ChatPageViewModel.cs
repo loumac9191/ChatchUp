@@ -31,7 +31,10 @@ namespace TestClient.ViewModels
 
             usersLoggedIn = server.UsernameInChat();
             userList = new ObservableCollection<string>();
-            userList.Add(use)
+            foreach (string u in usersLoggedIn)
+            {
+                userList.Add(user);
+            }
         }
 
         public void DoSomething()

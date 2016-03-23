@@ -100,7 +100,7 @@
                     <Rectangle Fill="#373737" Grid.Row="0" Grid.Column="0"/>
                     <Label Content="Who's Here" Grid.Row="0" Grid.Column="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Microsoft NeoGothic" FontWeight="Bold"/>
                     <Border Grid.Row="1" BorderBrush="#232323" BorderThickness="1">
-                        <ListBox Grid.Row="1" ItemsSource="{Binding userList}" Background="#232323" FontFamily="Microsoft NeoGothic" FontWeight="Bold" Foreground="White" Height="Auto" Width="Auto">
+                        <ListBox Grid.Row="1" ItemsSource="{Binding userList}" Background="#232323" FontFamily="Microsoft NeoGothic" FontWeight="Bold" Foreground="White" Height="Auto" Width="Auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}"/>
