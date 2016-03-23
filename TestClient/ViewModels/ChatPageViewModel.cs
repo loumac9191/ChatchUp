@@ -30,7 +30,11 @@ namespace TestClient.ViewModels
             text = new ObservableCollection<string>();
 
             usersLoggedIn = server.UsernameInChat();
-            userList = new ObservableCollection<string>(usersLoggedIn);
+            userList = new ObservableCollection<string>();
+            foreach (string u in usersLoggedIn)
+            {
+                userList.Add(user);
+            }
         }
 
         public void DoSomething()
@@ -79,6 +83,7 @@ namespace TestClient.ViewModels
         public void SendButton()
         {
             server.SendMessage(messageToSend);
+            
             text.Add(String.Format("{0}: {1}", user, messageToSend));
             messageToSend = "";
         }

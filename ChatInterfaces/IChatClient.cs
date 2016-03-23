@@ -9,5 +9,9 @@ namespace ChatInterfaces
     {
         [OperationContract(IsOneWay = true)]
         void ReceiveMessage(string userName, string message);
+
+        [OperationContract(IsOneWay = true)]
+        void UpdateUserList(string userName);
+
     }
 }

@@ -12,5 +12,5 @@
         <vm:MainViewModel/>
     </Window.DataContext>
 
-    <Frame Source="{Binding page}" NavigationUIVisibility="Hidden"/>
+    <Frame x:Name="MainFrame" Source="{Binding page}" NavigationUIVisibility="Hidden"/>
 </Window>

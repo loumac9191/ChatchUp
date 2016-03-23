@@ -2,22 +2,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using TestClient.ViewModels;
 
 namespace TestClient
 {
-    public class ChatClientImpl : IChatClient
+    internal class ChatClientImpl : IChatClient
     {
+        
         public void ReceiveMessage(string userName, string message)
         {
-            ChatPageViewModel s = App.Current.MainWindow.DataContext as ChatPageViewModel;
-            s.text.Add(String.Format("{0}: {1}", userName, message));
+            Frame frame = App.Current.MainWindow.FindName("MainFrame") as Frame;
+            ChatPage chatPage = frame.Content as ChatPage;
+            ChatPageViewModel cpvm = chatPage.DataContext as ChatPageViewModel;
+            cpvm.text.Add(String.Format("{0}: {1}", userName, message));
+        }
 
-
-
-            //Console.WriteLine("{0}: {1}", userName, message);
+        public void UpdateUserList(string userName)
+        {
+            Frame frame = App.Current.MainWindow.FindName("MainFrame") as Frame;
+            ChatPage chatPage = frame.Content as ChatPage;
+            ChatPageViewModel cpvm = chatPage.DataContext as ChatPageViewModel;
+            cpvm.userList.Add(userName);
         }
     }
 }
