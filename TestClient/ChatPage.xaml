@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="620"
       Title="ChatPage">
-    
+
     <Page.DataContext>
         <vm:ChatPageViewModel/>
     </Page.DataContext>

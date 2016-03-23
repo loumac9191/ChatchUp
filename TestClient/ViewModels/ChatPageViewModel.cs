@@ -30,7 +30,8 @@ namespace TestClient.ViewModels
             text = new ObservableCollection<string>();
 
             usersLoggedIn = server.UsernameInChat();
-            userList = new ObservableCollection<string>(usersLoggedIn);
+            userList = new ObservableCollection<string>();
+            userList.Add(use)
         }
 
         public void DoSomething()
