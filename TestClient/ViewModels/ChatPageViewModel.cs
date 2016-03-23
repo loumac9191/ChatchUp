@@ -79,6 +79,7 @@ namespace TestClient.ViewModels
         public void SendButton()
         {
             server.SendMessage(messageToSend);
+            
             text.Add(String.Format("{0}: {1}", user, messageToSend));
             messageToSend = "";
         }
