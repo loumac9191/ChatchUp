@@ -81,5 +81,123 @@ namespace ChatDatabaseRepositoriesTest
             List<chatingUser> expectedList = new List<chatingUser>() { user1, user2, user3, user4 };
             CollectionAssert.AreEqual(expectedList, testList);
         }
+
+        [TestMethod]
+        public void Test_chatingUserRepos_CallsSaveChangeMethode_WhenDownLoadsMethodIsCalled()
+        {
+            //Arrange
+            Mock<ChatDataBaseEntities> context = new Mock<ChatDataBaseEntities>();
+            chatingUserRepository userRepos = new chatingUserRepository(context.Object);
+            //Act
+            userRepos.DownLoad();
+            //Assert
+            context.Verify(x => x.SaveChanges());
+        }
+        [TestMethod]
+        public void Test_chatingUserRepos_ReturnsAListOfAllUserInBuffer_WhenGetAllUserMethodeIsCalled() 
+        { 
+            //Arrange
+            chatingUser user1 = new chatingUser() { user_id = 1, user_name = "Idriss" };
+            chatingUser user2 = new chatingUser() { user_id = 2, user_name = "Oyeniyi" };
+            chatingUser user3 = new chatingUser() { user_id = 3, user_name = "Olaoluwa" };
+            
+            List<chatingUser> expectedValue = new List<chatingUser>(){ user1, user2, user3 };
+
+            ChatDataBaseEntities context = new ChatDataBaseEntities();
+            chatingUserRepository userRepos = new chatingUserRepository(context);
+
+            userRepos.Buffer.Add(user1);
+            userRepos.Buffer.Add(user2);
+            userRepos.Buffer.Add(user3);
+
+            //Act
+            var testValue = userRepos.GetAllUsers();
+
+            //Assert
+            CollectionAssert.AreEqual(expectedValue, testValue);
+        }
+
+        [TestMethod]
+        public void Test_chatingUserRepos_ReturnsAnEmptyList_WhenGetAllUserMethodeIsCalledAndTheBufferIsEmpty()
+        {
+            //Arrange
+            List<chatingUser> expectedValue = new List<chatingUser>() { };
+
+            ChatDataBaseEntities context = new ChatDataBaseEntities();
+            chatingUserRepository userRepos = new chatingUserRepository(context);
+
+            //Act
+            var testValue = userRepos.GetAllUsers();
+
+            //Assert
+            CollectionAssert.AreEqual(expectedValue, testValue);
+        }
+
+        [TestMethod]
+        public void Test_chatingUserRepos_ReturnsmyUser_WhenGetUserByUserNameMethodeIsCalled_GivenMyUserUserNameInArgument()
+        {
+            //Arrange
+            chatingUser myUser = new chatingUser() {user_name = "Idriss" };
+            chatingUser expectedValue = myUser;
+
+            ChatDataBaseEntities context = new ChatDataBaseEntities();
+            chatingUserRepository userRepos = new chatingUserRepository(context);
+            userRepos.Buffer.Add(myUser);
+
+
+            //Act
+            var testValue = userRepos.GetUserByUserName("Idriss");
+
+            //Assert
+            Assert.AreSame(expectedValue, testValue);
+        }
+
+        [TestMethod]
+        public void Test_chatingUserRepos_ReturnsmyUser_WhenGetUsersBySignedInDateMethodeIsCalled_GivenMyUserSignedInDateInArgument()
+        {
+            //Arrange
+            DateTime date = new DateTime(1918,11,11);
+            chatingUser myUser = new chatingUser() { sign_in_date = date };
+            List<chatingUser> expectedValue = new List<chatingUser>() { myUser};
+
+            ChatDataBaseEntities context = new ChatDataBaseEntities();
+            chatingUserRepository userRepos = new chatingUserRepository(context);
+            userRepos.Buffer.Add(myUser);
+
+
+            //Act
+            var testValue = userRepos.GetUsersBySignedInDate(date);
+
+            //Assert
+            CollectionAssert.AreEqual(expectedValue, testValue);
+        }
+
+        [TestMethod]
+        public void Test_chatingUserRepos_ReturnsAListofthreechatingUsers_WhenGetUsersBySignedInDateMethodeIsCalled_GivenTheMutualSignedInDateInArgument()
+        {
+            //Arrange
+            DateTime date = new DateTime(1918, 11, 11);
+
+            chatingUser myUser1 = new chatingUser() { sign_in_date = date };
+            chatingUser myUser2 = new chatingUser() { sign_in_date = date };
+            chatingUser myUser3 = new chatingUser() { sign_in_date = date };
+            List<chatingUser> expectedValue = new List<chatingUser>() { myUser1, myUser2, myUser3 };
+
+            ChatDataBaseEntities context = new ChatDataBaseEntities();
+            chatingUserRepository userRepos = new chatingUserRepository(context);
+           
+            userRepos.Buffer.Add(myUser1);
+            userRepos.Buffer.Add(myUser2);
+            userRepos.Buffer.Add(myUser3);
+
+
+
+            //Act
+            var testValue = userRepos.GetUsersBySignedInDate(date);
+
+            //Assert
+            CollectionAssert.AreEqual(expectedValue, testValue);
+
+        }
     }
 }

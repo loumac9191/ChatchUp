@@ -56,6 +56,7 @@
     <Compile Include="chatMessage.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="chatMessageRepository.cs" />
     <Compile Include="ChatModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -71,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChatModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MessageDateComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
